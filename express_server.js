@@ -12,6 +12,7 @@ const urlDatabase = {
 };
 
 
+
 app.get("/", (req, res) => {
   res.send("Hello!");
 });
@@ -28,6 +29,14 @@ app.get("/urls", (req, res) => {
 app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 });
+
+app.get("/urls/:id", (req, res) => {
+  const id = req.params.id
+  const longURL = urlDatabase[id]
+  const templateVars = {id, longURL};
+  res.render("urls_show", templateVars);
+});
+
 
 
 app.listen(PORT, () => {
